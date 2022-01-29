@@ -89,7 +89,7 @@ public class CarController : MonoBehaviour
         {
             if (Mathf.Abs(realAngle) > 5)
             {
-                Debug.Log("Speed:"+servoSpeed);
+
                 wheelTrans.RotateAround(wheelTrans.position, wheelTrans.up,  servoSpeed * -Mathf.Sign(realAngle));
                 realAngle += servoSpeed *- Mathf.Sign(realAngle);
                 Quaternion target = Quaternion.Euler(0, realAngle, 0);
@@ -109,6 +109,15 @@ public class CarController : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        //forward
+
+        rb.velocity = this.transform.forward.normalized * forceForward;
+
+
+    }
+
     private IEnumerator BumpAnimation()
     {
         float t = 0;
@@ -120,33 +129,8 @@ public class CarController : MonoBehaviour
 
             // Dampen towards the target rotation
             float angle = Mathf.Lerp(_minScale, _maxScale, _animateServo.Evaluate(t / _animationDuration));
-            trans.rotation = Quaternion.Euler(0, angle*sign, 0);
+            trans.rotation = Quaternion.Euler(0, angle * sign, 0);
         }
-    }
-
-    // Update is called once per frame
-    private void FixedUpdate()
-    {
-        //forward
-
-        rb.velocity = this.transform.forward.normalized * forceForward;
-
-        //wheel rotate
-        //Quaternion target1 = Quaternion.Euler(wheelTrans.localRotation.eulerAngles.x, wheelTrans.localRotation.y, turn);
-        //wheelTrans.rotation = Quaternion.Slerp(wheelTrans.rotation, target1, Time.deltaTime * smooth);
-        //xDebug.Log(wheelTrans.eulerAngles);
-        //wheelTrans.RotateAround(wheelTrans.position, wheelTrans.up, Time.deltaTime * turn * smooth);
-
-        //kliknuo je miš
-
-    }
-
-    private  Vector2 rotate(Vector2 v, float delta)
-    {
-        return new Vector2(
-            v.x * Mathf.Cos(delta) - v.y * Mathf.Sin(delta),
-            v.x * Mathf.Sin(delta) + v.y * Mathf.Cos(delta)
-        );
     }
 
 }
