@@ -9,6 +9,7 @@ public class CameraScript : MonoBehaviour
     public Animation camAnim;
     [SerializeField]
     int phoneMask;
+    [SerializeField] private GameObject _secondCameraGO;
     Camera _cam;
     Transform _transform;
     public PostProcessVolume volume;
@@ -25,9 +26,9 @@ public class CameraScript : MonoBehaviour
         _transform = this.transform;
         volume.profile.TryGetSettings(out depthOfField);
         PhoneActive = false;
+        _secondCameraGO.SetActive(true);
     }
-    // Update is called once per frame
-
+    
     private void Update()
     {
         Vector2 mousePos = Input.mousePosition;
