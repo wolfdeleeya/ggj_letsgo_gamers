@@ -33,7 +33,7 @@ public class OtherCarController : MonoBehaviour
         if (Physics.Raycast(shootingPoint.position, rb.velocity, out hit, slowDownDistance, otherCarsLayer))
         {
             float newSpeed = hit.transform.gameObject.GetComponent<OtherCarController>().Speed;
-            Speed = newSpeed;
+            Speed = newSpeed-1;
         }
 
         if (rb.position.z < myCarTransform.position.z - 20)

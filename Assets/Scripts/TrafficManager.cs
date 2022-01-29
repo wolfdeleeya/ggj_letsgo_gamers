@@ -90,8 +90,8 @@ public class TrafficManager : MonoBehaviour
         {
             if (carTransforms[i].position.y > 1)
             {
-                carScripts[i].Speed += 5;
-                carTransforms[i].position = new Vector3(carTransforms[i].position.x,0,carTransforms[i].position.z + 10);
+                carTransforms[i].position = new Vector3(carTransforms[i].position.x,0,carTransforms[i].position.z - 20);
+                carScripts[i].Speed -= 5;
             }
         }
     }
