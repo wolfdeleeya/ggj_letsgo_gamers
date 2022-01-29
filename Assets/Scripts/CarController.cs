@@ -7,6 +7,9 @@ using UnityEngine.Events;
 public class CarController : MonoBehaviour
 {
     [SerializeField]
+    bool isOverBarrier;
+    float side;
+    [SerializeField]
     LayerMask wheelMask;
     [SerializeField]
     AnimationCurve _animateServo;
@@ -48,7 +51,8 @@ public class CarController : MonoBehaviour
         acamera = this.GetComponentInChildren<Camera>();
         isPhoneView = false;
         wheelHold = false;
-        
+        isOverBarrier = false;
+        side = 0;
     }
     private void Update()
     {
@@ -139,9 +143,20 @@ public class CarController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        
         //forward
+        Vector3 vec = this.transform.forward.normalized * forceForward;
+        Debug.Log(vec);
+        if (isOverBarrier && vec.x*side > 1)
+        {
+            rb.velocity = new Vector3(0,vec.y,vec.z);
+        }
+        else
+        {
+            rb.velocity = vec;
+        }
+        
 
-        rb.velocity = this.transform.forward.normalized * forceForward;
 
 
     }
@@ -159,6 +174,7 @@ public class CarController : MonoBehaviour
             float angle = Mathf.Lerp(_minScale, _maxScale, _animateServo.Evaluate(t / _animationDuration));
             trans.rotation = Quaternion.Euler(0, angle * sign, 0);
         }
+        trans.rotation = Quaternion.Euler(0, 0, 0);
     }
     public void switchView()
     {
@@ -192,5 +208,44 @@ public class CarController : MonoBehaviour
     private void reverseRotateWheel()
     {
         wheelTrans.RotateAround(wheelTrans.position, wheelTrans.up, servoSpeed * -Mathf.Sign(realAngle));
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Ziiid!!");
+        isOverBarrier = true;
+        if (other.CompareTag("WallLeft"))
+        {
+            side = -1;
+            isOverBarrier = true;
+        }else if (other.CompareTag("WallRight"))
+        {
+            side = 1;
+            isOverBarrier = true;
+        }
+
+
+
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        isOverBarrier = true;
+        if (other.CompareTag("WallLeft"))
+        {
+            side = -1;
+            isOverBarrier = true;
+        }
+        else if (other.CompareTag("WallRight"))
+        {
+            side = 1;
+            isOverBarrier = true;
+        }
+    }
+
+
+    private void OnTriggerExit(Collider other)
+    {
+        isOverBarrier = false;
     }
 }
