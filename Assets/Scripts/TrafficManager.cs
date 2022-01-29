@@ -29,23 +29,30 @@ public class TrafficManager : MonoBehaviour
 
     private List<OtherCarController> carScripts;
     private List<Transform> carTransforms;
+    private List<GameObject> createdCarPrefabs;
     
     private void Awake()
     {
         Instance = this;
+        carScripts = new List<OtherCarController>();
+        carTransforms = new List<Transform>();
+        createdCarPrefabs = new List<GameObject>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        foreach (var carPrefab in carPrefabs)
+        {
+            var car = Instantiate(carPrefab, Vector3.back, Quaternion.identity);
+            car.SetActive(false);
+            createdCarPrefabs.Add(car);
+        }
         spawnPointsX = new float[numOfLanes];
         CalculateSpawningPoints();
         
         myCarPosition = myCar.GetComponent<Transform>();
         StartCoroutine(Cooldown(spawnDelay));
-
-        carScripts = new List<OtherCarController>();
-        carTransforms = new List<Transform>();
     }
     
     public IEnumerator Cooldown(float delay)
@@ -80,8 +87,28 @@ public class TrafficManager : MonoBehaviour
 
     public void RespawnCar(int id)
     {
-        carList[id].transform.position = new Vector3(spawnPointsX[Random.Range(0, numOfLanes)], 0,
+        List<int> availableIndices = new List<int>();
+        for (int i = 0; i < createdCarPrefabs.Count; i++)
+        {
+            if (!createdCarPrefabs[i].activeInHierarchy)
+            {
+                availableIndices.Add(i);
+            }
+        }
+
+        int ind = Random.Range(0, availableIndices.Count);
+        var newCar = createdCarPrefabs[availableIndices[ind]];
+        
+        carList[id].SetActive(false);
+        newCar.SetActive(true);
+
+        newCar.transform.position = new Vector3(spawnPointsX[Random.Range(0, numOfLanes)], 0,
             myCarPosition.position.z + spawnDistance);
+        newCar.transform.rotation = Quaternion.identity;
+        newCar.GetComponent<OtherCarController>().Speed = Random.Range(lowestSpeed, highestSpeed);
+        newCar.GetComponent<OtherCarController>().Id = id;
+        carList[id] = newCar;
+        carList[id].SetActive(true);
     }
 
     private void Update()
