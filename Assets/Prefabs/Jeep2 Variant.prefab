@@ -199,8 +199,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Speed>k__BackingField: 0
-  slowDownDistance: 15
+  slowDownDistance: 5
   otherCarsLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   shootingPoint: {fileID: 327503808031162194}

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -536,16 +536,15 @@ MonoBehaviour:
   - {fileID: 195036284488533928, guid: 9a2d8d7a5a197b14ab52a47dfef09288, type: 3}
   - {fileID: 758915296850262594, guid: ccde5c5147505734bb9939ad3e92c3ba, type: 3}
   - {fileID: 9207633416555490307, guid: 2b909fe5b4ca6b743bc4520bf70a0005, type: 3}
-  - {fileID: 5399293966180342973, guid: 986c9233c694be94d9f92208172bdd82, type: 3}
+  - {fileID: 790193558990734788, guid: f548e730ca9eb104da084063a2e36e29, type: 3}
   - {fileID: 1860963096224440502, guid: 053e606a51c581f439a254b4af40dd26, type: 3}
   - {fileID: 1931721892371983033, guid: 75d1e8695e944c540a16faed2f474818, type: 3}
   - {fileID: 7888444156012522220, guid: fb391bfa1d123d24aaebf0f831be97a0, type: 3}
   - {fileID: 5528584254244683664, guid: b1821e60843d3a9468d29c552d29c3d4, type: 3}
   - {fileID: 6538824093849576452, guid: ee29a57967763404bb8d76ced3cdebc8, type: 3}
   - {fileID: 1389255834267953630, guid: eddfa651f12cb174ba396fa26f493d3b, type: 3}
-  - {fileID: 790193558990734788, guid: f548e730ca9eb104da084063a2e36e29, type: 3}
   carList: []
-  numOfCars: 15
+  numOfCars: 10
   numOfLanes: 6
   lowestSpeed: 20
   highestSpeed: 30
