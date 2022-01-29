@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - SteerWheel
+  - WallLeft
+  - WallRight
   layers:
   - Default
   - TransparentFX
