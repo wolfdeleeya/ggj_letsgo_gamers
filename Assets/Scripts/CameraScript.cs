@@ -1,30 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class CameraScript : MonoBehaviour
 {
-    Camera cam;
-    Vector3 MyPos;
-    Vector3 smjer;
+    Camera _cam;
+    Transform _transform;
+    public PostProcessVolume volume;
+    DepthOfField depthOfField;
+    float hitDistance = 5;
+    public Transform phone;
     
     // Start is called before the first frame update
     void Start()
     {
-        cam = this.GetComponent<Camera>();
-        MyPos = cam.transform.position;
-        smjer = cam.transform.forward * 10;
+       _cam = this.GetComponent<Camera>();
+        _transform = this.transform;
+        volume.profile.TryGetSettings(out depthOfField);
         
     }
     // Update is called once per frame
 
-    private void FixedUpdate()
+    private void Update()
     {
-        Debug.DrawRay(cam.transform.position, smjer, Color.red);
+        /*if(Physics.Raycast(_transform.position,transform.forward,out RaycastHit hit, 100f))
+        {
+            hitDistance = hit.distance;
+        }*/
+        hitDistance = (phone.position - _cam.transform.position).magnitude;
+
+        setFocus();
     }
 
-    public void calcPoint(Vector3 worldPosition)
+    private void setFocus()
     {
-        
+        depthOfField.focusDistance.value = hitDistance;
     }
+
 }

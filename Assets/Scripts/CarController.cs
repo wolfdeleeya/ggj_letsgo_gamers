@@ -21,6 +21,8 @@ public class CarController : MonoBehaviour
     public float servoSpeed;
     public float maxAngle;
     [SerializeField]
+    private float turnScale;
+    [SerializeField]
     private float _animationDuration;
     [SerializeField]
     private float _maxScale;
@@ -33,10 +35,11 @@ public class CarController : MonoBehaviour
         rb = this.GetComponent<Rigidbody>();
         trans = transform;
         acamera = this.GetComponentInChildren<Camera>();
-        centerWheelScreen = acamera.WorldToScreenPoint(wheelTrans.position);
+        
     }
     private void Update()
     {
+        centerWheelScreen = acamera.WorldToScreenPoint(wheelTrans.position);
         if (Input.GetMouseButtonDown(0))
         {
             Vector2 mousePos = Input.mousePosition;
@@ -74,9 +77,9 @@ public class CarController : MonoBehaviour
                     vecStart = vec;
                     //turn Angle
 
-                    realAngle += angle * -cross;
+                    realAngle += angle * -cross ;
 
-                    Quaternion target = Quaternion.Euler(0, realAngle, 0);
+                    Quaternion target = Quaternion.Euler(0, realAngle * turnScale, 0);
 
                     // Dampen towards the target rotation
                     trans.rotation = Quaternion.Slerp(trans.rotation, target, Time.deltaTime * smoothTurn);
@@ -92,7 +95,7 @@ public class CarController : MonoBehaviour
 
                 wheelTrans.RotateAround(wheelTrans.position, wheelTrans.up,  servoSpeed * -Mathf.Sign(realAngle));
                 realAngle += servoSpeed *- Mathf.Sign(realAngle);
-                Quaternion target = Quaternion.Euler(0, realAngle, 0);
+                Quaternion target = Quaternion.Euler(0, realAngle*turnScale, 0);
 
                 // Dampen towards the target rotation
                 trans.rotation = Quaternion.Slerp(trans.rotation, target, Time.deltaTime * smoothTurn);
