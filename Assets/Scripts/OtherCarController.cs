@@ -30,13 +30,14 @@ public class OtherCarController : MonoBehaviour
         rb.velocity = new Vector3(0, 0, Speed);
         
         RaycastHit hit;
+        Debug.DrawRay(shootingPoint.position, rb.velocity, Color.red);
         if (Physics.Raycast(shootingPoint.position, rb.velocity, out hit, slowDownDistance, otherCarsLayer))
         {
             float newSpeed = hit.transform.gameObject.GetComponent<OtherCarController>().Speed;
             Speed = newSpeed-1;
         }
 
-        if (rb.position.z < myCarTransform.position.z - 20)
+        if (rb.position.z < myCarTransform.position.z - 2)
         {
             TrafficManager.Instance.RespawnCar(Id);
         }
