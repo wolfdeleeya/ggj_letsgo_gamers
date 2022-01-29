@@ -13,11 +13,16 @@ public class OtherCarController : MonoBehaviour
     public LayerMask otherCarsLayer;
 
     public Transform shootingPoint;
+
+    private Transform myCarTransform;
+    
+    public int Id { get; set; }
     
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         slowDownDistance = Random.Range(slowDownDistance - 2, slowDownDistance + 2);
+        myCarTransform = CarController.Instance.transform;
     }
 
     private void FixedUpdate()
@@ -29,6 +34,11 @@ public class OtherCarController : MonoBehaviour
         {
             float newSpeed = hit.transform.gameObject.GetComponent<OtherCarController>().Speed;
             Speed = newSpeed;
+        }
+
+        if (rb.position.z < myCarTransform.position.z - 20)
+        {
+            TrafficManager.Instance.RespawnCar(Id);
         }
     }
 }

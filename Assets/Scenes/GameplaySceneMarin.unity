@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -200,6 +200,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &523793426
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 523793427}
+  m_Layer: 6
+  m_Name: shootingPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &523793427
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523793426}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -12.89, y: 1.5699999, z: 1077.49}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &689564496
 GameObject:
@@ -626,15 +656,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 457ae1aad98f044419b4805e494ff03c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  car: {fileID: 3432605723777199978, guid: fd12661b6e4b85a4a8d6846840d39521, type: 3}
+  carPrefabs:
+  - {fileID: 4991387718486909217, guid: 2bbc23768bcaf5a4a9726bd40d250ebb, type: 3}
+  - {fileID: 4195202778826784338, guid: 9ddd1ce05225a234987ca56f98e56e7d, type: 3}
+  - {fileID: 7065138399073281724, guid: 2efc7bc084d8f8a469b51cf31e6b4f83, type: 3}
+  - {fileID: 1668988901125294185, guid: 65ae65b77203f9d4a9ee3a51983a4df5, type: 3}
+  - {fileID: 8764237263994357203, guid: fc80bef78792bff47bbb923bd3514036, type: 3}
+  - {fileID: 6774304104318196598, guid: 09a2f4595ad2b8d49930091ca6deedc5, type: 3}
+  - {fileID: 4617756897281141205, guid: 1777747f6441b054099668c0badfc588, type: 3}
+  - {fileID: 4675545502617401096, guid: 8f6a432c1562fd746b4e80c25c934429, type: 3}
+  - {fileID: 2042220229266777537, guid: 8c5ddbad1a5c166498547b3828abd6bc, type: 3}
+  - {fileID: 5605740032123714563, guid: ea11900f4cf8ae448a57a7ac16ad91d6, type: 3}
+  - {fileID: 338903394745234325, guid: d41bcef880999cc468618bc7e3068662, type: 3}
+  - {fileID: 8580421775135670102, guid: 49eaca1a62d9d3e4f97fc39fc8f4fd2a, type: 3}
+  - {fileID: 681463907787802527, guid: bc8d2fd47dd3ea04fa3fa0d9e6b2a357, type: 3}
+  - {fileID: 4328002469536635323, guid: 1e07e64b85609624b9be5806dd1c124e, type: 3}
+  - {fileID: 5358446199850630346, guid: 997d6bf8aa9fbe84d82057a38d06f2b1, type: 3}
+  - {fileID: 2964001264040145528, guid: b73c32781727d814c9052a0cc222e238, type: 3}
+  - {fileID: 6478029042274717489, guid: b5066d653db4b4449a1c24cee12120f4, type: 3}
+  - {fileID: 1364603979534429652, guid: ab2f28b52f0ccdc46834d89f800af367, type: 3}
+  - {fileID: 1042119466463660109, guid: d2f8c05df05593142b474b36f4873247, type: 3}
+  - {fileID: 195036284488533928, guid: 9a2d8d7a5a197b14ab52a47dfef09288, type: 3}
+  - {fileID: 758915296850262594, guid: ccde5c5147505734bb9939ad3e92c3ba, type: 3}
+  - {fileID: 9207633416555490307, guid: 2b909fe5b4ca6b743bc4520bf70a0005, type: 3}
+  - {fileID: 5399293966180342973, guid: 986c9233c694be94d9f92208172bdd82, type: 3}
+  - {fileID: 1860963096224440502, guid: 053e606a51c581f439a254b4af40dd26, type: 3}
+  - {fileID: 1931721892371983033, guid: 75d1e8695e944c540a16faed2f474818, type: 3}
+  - {fileID: 7888444156012522220, guid: fb391bfa1d123d24aaebf0f831be97a0, type: 3}
+  - {fileID: 5528584254244683664, guid: b1821e60843d3a9468d29c552d29c3d4, type: 3}
+  - {fileID: 6538824093849576452, guid: ee29a57967763404bb8d76ced3cdebc8, type: 3}
+  - {fileID: 1389255834267953630, guid: eddfa651f12cb174ba396fa26f493d3b, type: 3}
+  - {fileID: 790193558990734788, guid: f548e730ca9eb104da084063a2e36e29, type: 3}
   carList: []
-  numOfCars: 200
+  numOfCars: 15
   numOfLanes: 6
   lowestSpeed: 20
-  highestSpeed: 25
+  highestSpeed: 30
   myCar: {fileID: 1246641515522704012}
-  spawnDistance: 200
-  spawnDelay: 0.5
+  spawnDistance: 150
+  spawnDelay: 1.5
   roadWidth: 30
 --- !u!65 &1272307397
 BoxCollider:
@@ -1669,7 +1729,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1246641515522704012}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.9465415, y: 0, z: -49.57}
+  m_LocalPosition: {x: 3.9465415, y: 0, z: -51.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1353478124}

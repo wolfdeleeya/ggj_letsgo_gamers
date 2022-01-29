@@ -333,6 +333,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   shootingPoint: {fileID: 3327539008880031219}
+  myCar: {fileID: 1246641514797377586, guid: ed3167427492c454a8471bc45cea326c, type: 3}
 --- !u!1 &3432605723777199980
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,7 +6,9 @@ using Random = UnityEngine.Random;
 
 public class TrafficManager : MonoBehaviour
 {
-    public GameObject car;
+    public static TrafficManager Instance;
+    
+    public List<GameObject> carPrefabs;
     public List<GameObject> carList;
     public int numOfCars = 10;
     public int numOfLanes = 6;
@@ -22,15 +24,28 @@ public class TrafficManager : MonoBehaviour
     public float spawnDelay = 1.0f;
 
     public float roadWidth = 30f;
+    
+    int index = 0;
+
+    private List<OtherCarController> carScripts;
+    private List<Transform> carTransforms;
+    
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         spawnPointsX = new float[numOfLanes];
-        calculateSpawningPoints();
+        CalculateSpawningPoints();
         
         myCarPosition = myCar.GetComponent<Transform>();
         StartCoroutine(Cooldown(spawnDelay));
+
+        carScripts = new List<OtherCarController>();
+        carTransforms = new List<Transform>();
     }
     
     public IEnumerator Cooldown(float delay)
@@ -38,22 +53,46 @@ public class TrafficManager : MonoBehaviour
         yield return new WaitForSeconds(delay);
         if (carList.Count < numOfCars)
         {
+            GameObject car = carPrefabs[Random.Range(0, carPrefabs.Count)];
             var auto = Instantiate(car, new Vector3(spawnPointsX[Random.Range(0, numOfLanes)], 0,
                                             myCarPosition.position.z + spawnDistance),
                                             Quaternion.identity);
             carList.Add(auto);
-            auto.GetComponent<OtherCarController>().Speed = Random.Range(lowestSpeed, highestSpeed);
+            var carScript = auto.GetComponent<OtherCarController>();
+            carTransforms.Add(carScript.transform);
+            carScripts.Add(carScript);
+            carScript.Speed = Random.Range(lowestSpeed, highestSpeed);
+            carScript.Id = index;
+            index++;
             StartCoroutine(Cooldown(delay));
         }
     }
 
-    public void calculateSpawningPoints()
+    public void CalculateSpawningPoints()
     {
         float d = roadWidth / (numOfLanes * 2);
         float startingX = -roadWidth / 2 + d;
         for (int i = 0; i < numOfLanes; i++)
         {
             spawnPointsX[i] = startingX + i * (2 * d);
+        }
+    }
+
+    public void RespawnCar(int id)
+    {
+        carList[id].transform.position = new Vector3(spawnPointsX[Random.Range(0, numOfLanes)], 0,
+            myCarPosition.position.z + spawnDistance);
+    }
+
+    private void Update()
+    {
+        for (int i = 0; i < carScripts.Count; i++)
+        {
+            if (carTransforms[i].position.y > 1)
+            {
+                carScripts[i].Speed += 5;
+                carTransforms[i].position = new Vector3(carTransforms[i].position.x,0,carTransforms[i].position.z + 10);
+            }
         }
     }
 }
