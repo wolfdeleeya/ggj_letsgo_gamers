@@ -108,6 +108,8 @@ public class TrafficManager : MonoBehaviour
         newCar.GetComponent<OtherCarController>().Speed = Random.Range(lowestSpeed, highestSpeed);
         newCar.GetComponent<OtherCarController>().Id = id;
         carList[id] = newCar;
+        carTransforms[id] = newCar.transform;
+        carScripts[id] = newCar.GetComponent<OtherCarController>();
         carList[id].SetActive(true);
     }
 
@@ -117,8 +119,9 @@ public class TrafficManager : MonoBehaviour
         {
             if (carTransforms[i].position.y > 1)
             {
-                carTransforms[i].position = new Vector3(carTransforms[i].position.x,0,carTransforms[i].position.z - 20);
-                carScripts[i].Speed -= 5;
+                //carTransforms[i].position = new Vector3(carTransforms[i].position.x,0,carTransforms[i].position.z - 20);
+                //carScripts[i].Speed -= 5;
+                carList[i].SetActive(false);
             }
         }
     }

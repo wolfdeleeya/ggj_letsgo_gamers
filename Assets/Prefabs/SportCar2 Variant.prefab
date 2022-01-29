@@ -103,7 +103,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: c750512b51c0aaf4b810865d28173138, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.551939
+      value: 7.5
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: c750512b51c0aaf4b810865d28173138, type: 3}
       propertyPath: m_LocalPosition.y
@@ -111,7 +111,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: c750512b51c0aaf4b810865d28173138, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1086.1565
+      value: 595.8059
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: c750512b51c0aaf4b810865d28173138, type: 3}
       propertyPath: m_LocalRotation.w
@@ -167,7 +167,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!65 &3053275335002828559
 BoxCollider:

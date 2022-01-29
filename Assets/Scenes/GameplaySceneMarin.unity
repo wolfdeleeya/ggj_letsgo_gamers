@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -152,36 +152,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &523793426
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 523793427}
-  m_Layer: 6
-  m_Name: shootingPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &523793427
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 523793426}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.89, y: 1.5699999, z: 1077.49}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &689564496
 GameObject:
@@ -536,8 +506,8 @@ MonoBehaviour:
   - {fileID: 195036284488533928, guid: 9a2d8d7a5a197b14ab52a47dfef09288, type: 3}
   - {fileID: 758915296850262594, guid: ccde5c5147505734bb9939ad3e92c3ba, type: 3}
   - {fileID: 9207633416555490307, guid: 2b909fe5b4ca6b743bc4520bf70a0005, type: 3}
-  - {fileID: 790193558990734788, guid: f548e730ca9eb104da084063a2e36e29, type: 3}
   - {fileID: 1860963096224440502, guid: 053e606a51c581f439a254b4af40dd26, type: 3}
+  - {fileID: 790193558990734788, guid: f548e730ca9eb104da084063a2e36e29, type: 3}
   - {fileID: 1931721892371983033, guid: 75d1e8695e944c540a16faed2f474818, type: 3}
   - {fileID: 7888444156012522220, guid: fb391bfa1d123d24aaebf0f831be97a0, type: 3}
   - {fileID: 5528584254244683664, guid: b1821e60843d3a9468d29c552d29c3d4, type: 3}
