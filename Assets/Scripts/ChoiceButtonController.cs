@@ -18,10 +18,12 @@ public class ChoiceButtonController : MonoBehaviour, IPointerEnterHandler, IPoin
     [SerializeField] private float _bumpUpDuration;
     [SerializeField] private float _bumpDownDuration;
     [SerializeField] private float _maxScaleMultiplier;
+    [SerializeField] private Color _hoverColor;
 
     private RectTransform _transform;
     private Vector3 _minScale;
     private Vector3 _maxScale;
+    private Color _startColor;
 
     private Coroutine _bumpCoroutine;
     private bool _isShown;
@@ -29,7 +31,7 @@ public class ChoiceButtonController : MonoBehaviour, IPointerEnterHandler, IPoin
     private void Start()
     {
         _transform = GetComponent<RectTransform>();
-
+        _startColor = _buttonImage.color;
         _minScale = _transform.localScale;
         _maxScale = _maxScaleMultiplier * _minScale;
 
@@ -84,14 +86,15 @@ public class ChoiceButtonController : MonoBehaviour, IPointerEnterHandler, IPoin
 
     private IEnumerator BumpUp()
     {
-        var currentScaleMagnitude = _transform.localScale.magnitude;
         float t = 0;
         while (t < _bumpUpDuration)
         {
             yield return null;
             t += Time.deltaTime;
+            float val = _bumpUpAnimationCurve.Evaluate(t / _bumpUpDuration);
             _transform.localScale =
-                Vector3.Lerp(_minScale, _maxScale, _bumpUpAnimationCurve.Evaluate(t / _bumpUpDuration));
+                Vector3.Lerp(_minScale, _maxScale, val);
+            SetButtonColor(Color.Lerp(_startColor, _hoverColor, val));
         }
 
         _transform.localScale = _maxScale;
@@ -99,14 +102,15 @@ public class ChoiceButtonController : MonoBehaviour, IPointerEnterHandler, IPoin
 
     private IEnumerator BumpDown()
     {
-        var currentScaleMagnitude = _transform.localScale.magnitude;
         float t = 0;
         while (t < _bumpDownDuration)
         {
             yield return null;
             t += Time.deltaTime;
+            float val = t / _bumpDownDuration;
             _transform.localScale =
-                Vector3.Lerp(_maxScale, _minScale, t / _bumpDownDuration);
+                Vector3.Lerp(_maxScale, _minScale, val);
+            SetButtonColor(Color.Lerp(_hoverColor, _startColor, val));
         }
 
         _transform.localScale = _minScale;
@@ -122,15 +126,27 @@ public class ChoiceButtonController : MonoBehaviour, IPointerEnterHandler, IPoin
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (_bumpCoroutine != null)
-            StopCoroutine(_bumpCoroutine);
-        _bumpCoroutine = StartCoroutine(BumpUp());
+        if (_isShown)
+        {
+            if (_bumpCoroutine != null)
+                StopCoroutine(_bumpCoroutine);
+            _bumpCoroutine = StartCoroutine(BumpUp());
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (_bumpCoroutine != null)
-            StopCoroutine(_bumpCoroutine);
-        _bumpCoroutine = StartCoroutine(BumpDown());
+        if (_isShown)
+        {
+            if (_bumpCoroutine != null)
+                StopCoroutine(_bumpCoroutine);
+            _bumpCoroutine = StartCoroutine(BumpDown());
+        }
+    }
+
+    private void SetButtonColor(Color color)
+    {
+        color.a = _buttonImage.color.a;
+        _buttonImage.color = color;
     }
 }

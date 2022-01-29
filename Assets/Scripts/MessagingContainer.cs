@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class MessagingContainer : MonoBehaviour
@@ -8,9 +10,19 @@ public class MessagingContainer : MonoBehaviour
     [SerializeField] private RectTransform _messagesParentTransform;
     [SerializeField] private GameObject _playerMessagePrefab;
     [SerializeField] private GameObject _gfMessagePrefab;
+    [SerializeField] private GameObject _typingGameObject;
 
+    private void Start()
+    {
+        _typingGameObject.SetActive(false);
+    }
+
+    public void StartTyping() => _typingGameObject.SetActive(true);
+    
     public void SpawnMessage(string message, bool isPlayer)
     {
+        if(!isPlayer)
+            _typingGameObject.SetActive(false);
         Instantiate(isPlayer ? _playerMessagePrefab : _gfMessagePrefab, _messagesParentTransform)
             .GetComponent<MessageBubbleController>().Initialize(message);
         Cleanup();

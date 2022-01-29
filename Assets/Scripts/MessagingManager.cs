@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.EventSystems;
 
 public class MessagingManager : MonoBehaviour
 {
@@ -28,7 +27,7 @@ public class MessagingManager : MonoBehaviour
             OnGFAngerChanged.Invoke(_gfAnger);
             Debug.Log(_gfAnger);
             if(_gfAnger >= 100)
-                GameManager.Instance.GameOver();
+                GameManager.Instance.GameOver(false);
         }
     }
 
@@ -39,12 +38,13 @@ public class MessagingManager : MonoBehaviour
 
     private IEnumerator SendNewMessage(MessageSO message)
     {
+        _container.StartTyping();
         yield return new WaitForSeconds(message.TypingDuration);
         _currentMessage = message;
         _container.SpawnMessage(_currentMessage.MessageText, false);
         OnMessageReceived.Invoke(_currentMessage);
         if(_currentMessage.IsInstantGameOver)
-            GameManager.Instance.GameOver();
+            GameManager.Instance.GameOver(false);
         else if(_currentMessage.IsInstantGameWon)
             GameManager.Instance.GameWon();
     }
