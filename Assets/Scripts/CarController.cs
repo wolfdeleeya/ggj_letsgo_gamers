@@ -7,6 +7,8 @@ using UnityEngine.Events;
 public class CarController : MonoBehaviour
 {
     [SerializeField]
+    float barrierForce;
+    [SerializeField]
     LayerMask wheelMask;
     [SerializeField]
     AnimationCurve _animateServo;
@@ -141,7 +143,7 @@ public class CarController : MonoBehaviour
     {
         //forward
 
-        rb.velocity = this.transform.forward.normalized * forceForward;
+        rb.velocity = this.transform.forward.normalized * forceForward - this.transform.right.normalized * barrierForce;
 
 
     }
@@ -192,5 +194,27 @@ public class CarController : MonoBehaviour
     private void reverseRotateWheel()
     {
         wheelTrans.RotateAround(wheelTrans.position, wheelTrans.up, servoSpeed * -Mathf.Sign(realAngle));
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Ziiid!!");
+        if (other.CompareTag("WallRight"))
+        {
+            barrierForce = 50;
+        }
+        else if (other.CompareTag("WallLeft"))
+        {
+            barrierForce = -50;
+        }
+       
+
+    }
+
+    
+
+    private void OnTriggerExit(Collider other)
+    {
+        barrierForce = 0;
     }
 }
