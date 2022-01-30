@@ -30,7 +30,7 @@ public class OtherCarController : MonoBehaviour
         rb.velocity = new Vector3(0, 0, Speed);
         
         RaycastHit hit;
-        Debug.DrawRay(shootingPoint.position, rb.velocity, Color.red);
+        // Debug.DrawRay(shootingPoint.position, rb.velocity, Color.red);
         if (Physics.Raycast(shootingPoint.position, rb.velocity, out hit, slowDownDistance, otherCarsLayer))
         {
             float newSpeed = hit.transform.gameObject.GetComponent<OtherCarController>().Speed;
