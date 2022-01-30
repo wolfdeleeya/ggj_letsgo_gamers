@@ -82,6 +82,7 @@ public class ChoiceButtonController : MonoBehaviour, IPointerEnterHandler, IPoin
         }
 
         SetAlpha(0);
+        _isShown = false;
     }
 
     private IEnumerator BumpUp()
