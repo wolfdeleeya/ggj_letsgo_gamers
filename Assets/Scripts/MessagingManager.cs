@@ -25,7 +25,6 @@ public class MessagingManager : MonoBehaviour
         {
             _gfAnger = Mathf.Clamp(value, 0, 100);
             OnGFAngerChanged.Invoke(_gfAnger);
-            Debug.Log(_gfAnger);
             if(_gfAnger >= 100)
                 GameManager.Instance.GameOver(false);
         }

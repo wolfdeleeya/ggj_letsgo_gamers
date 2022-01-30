@@ -2,10 +2,21 @@ using System;
 using UnityEngine.Events;
 
 [Serializable]
-public class UnityEventMessageSO: UnityEvent<MessageSO> {}
+public class UnityEventMessageSO : UnityEvent<MessageSO>
+{
+}
 
 [Serializable]
-public class UnityEventFloat: UnityEvent<float> {}
+public class UnityEventFloat : UnityEvent<float>
+{
+}
 
 [Serializable]
-public class UnityEventBool: UnityEvent<bool> {}
+public class UnityEventBool : UnityEvent<bool>
+{
+}
+
+[Serializable]
+public class UnityEventChunkController : UnityEvent<ChunkController>
+{
+}

@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,7 +8,9 @@ public class GameManager : MonoBehaviour
 {
     public UnityEvent OnGameWon;
     public UnityEventBool OnGameOver;
-    
+
+    private bool _isGameFinished;
+
     public static GameManager Instance { get; private set; }
 
     private void Awake()
@@ -21,12 +22,27 @@ public class GameManager : MonoBehaviour
         }
 
         Instance = this;
+        Time.timeScale = 1;
     }
 
-    public void GameWon() => OnGameWon.Invoke();
+    public void GameWon()
+    {
+        if (!_isGameFinished)
+        {
+            _isGameFinished = true;
+            OnGameWon.Invoke();
+        }
+    }
 
-    public void GameOver(bool isCrashed) => OnGameOver.Invoke(isCrashed);
-    
+    public void GameOver(bool isCrashed)
+    {
+        if (!_isGameFinished)
+        {
+            _isGameFinished = true;
+            OnGameOver.Invoke(isCrashed);
+        }
+    }
+
     public void Restart() => SceneManager.Instance.ChangeScene(SceneManager.Scene.Gameplay);
 
     public void GoToMenu() => SceneManager.Instance.ChangeScene(SceneManager.Scene.MainMenu);

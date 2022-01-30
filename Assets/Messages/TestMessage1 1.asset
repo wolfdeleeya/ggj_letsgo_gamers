@@ -23,4 +23,4 @@ MonoBehaviour:
     AngerDelta: 0
   AngerSpeedPerSecond: 3
   IsInstantGameOver: 0
-  IsInstantGameWon: 0
+  IsInstantGameWon: 1

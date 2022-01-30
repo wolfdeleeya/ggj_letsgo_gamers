@@ -35,6 +35,7 @@ public class CarController : MonoBehaviour
     private float _minScale;
     bool isPhoneView;
     bool wheelHold;
+    private bool isCollided;
 
     public static CarController Instance;
 
@@ -143,7 +144,12 @@ public class CarController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
+        if (isCollided)
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            return;
+        }
         //forward
         Vector3 vec = this.transform.forward.normalized * forceForward;
         Debug.Log(vec);
@@ -223,9 +229,15 @@ public class CarController : MonoBehaviour
             side = 1;
             isOverBarrier = true;
         }
+    }
 
-
-
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.collider.GetComponent<OtherCarController>())
+        {
+            GameManager.Instance.GameOver(true);
+            isCollided = true;
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -242,7 +254,12 @@ public class CarController : MonoBehaviour
             isOverBarrier = true;
         }
     }
-
+    
+    public void OnGameFinished(bool dummyVar)
+    {
+        forceForward = 0;
+        rb.detectCollisions = false;
+    }
 
     private void OnTriggerExit(Collider other)
     {
