@@ -6,13 +6,12 @@ using UnityEngine.Events;
 
 public class CarController : MonoBehaviour
 {
-    [SerializeField]
-    bool isOverBarrier;
+    public UnityEventFloat OnAngleValueChanged;
+
+    [SerializeField] bool isOverBarrier;
     float side;
-    [SerializeField]
-    LayerMask wheelMask;
-    [SerializeField]
-    AnimationCurve _animateServo;
+    [SerializeField] LayerMask wheelMask;
+    [SerializeField] AnimationCurve _animateServo;
     Rigidbody rb;
     public CameraScript cam;
     Camera acamera;
@@ -25,14 +24,10 @@ public class CarController : MonoBehaviour
     float realAngle;
     public float servoSpeed;
     public float maxAngle;
-    [SerializeField]
-    private float turnScale;
-    [SerializeField]
-    private float _animationDuration;
-    [SerializeField]
-    private float _maxScale;
-    [SerializeField]
-    private float _minScale;
+    [SerializeField] private float turnScale;
+    [SerializeField] private float _animationDuration;
+    [SerializeField] private float _maxScale;
+    [SerializeField] private float _minScale;
     bool isPhoneView;
     bool wheelHold;
     private bool isCollided;
@@ -55,10 +50,9 @@ public class CarController : MonoBehaviour
         isOverBarrier = false;
         side = 0;
     }
+
     private void Update()
     {
-        
-
         //find out center of Wheel in screen width and length
         centerWheelScreen = acamera.WorldToScreenPoint(wheelTrans.position);
 
@@ -66,9 +60,10 @@ public class CarController : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && !isPhoneView)
         {
             Vector2 mousePos = Input.mousePosition;
-            Vector3 worldPosition = acamera.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, acamera.nearClipPlane));
+            Vector3 worldPosition =
+                acamera.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, acamera.nearClipPlane));
             Vector3 smjer = (worldPosition - cam.transform.position).normalized * 100;
-            
+
             //if user clicked on steering wheel
             if (Physics.Raycast(cam.transform.position, smjer, out RaycastHit hit1))
             {
@@ -76,15 +71,12 @@ public class CarController : MonoBehaviour
                 {
                     vecStart = (mousePos - centerWheelScreen).normalized;
                 }
-                    //remember vector position from center to the point the user clicked no steering wheel
-               
-
+                //remember vector position from center to the point the user clicked no steering wheel
             }
             else
             {
                 vecStart = Vector3.zero;
             }
-           
         }
 
         //if user holding the mouse button on steering wheel
@@ -92,12 +84,13 @@ public class CarController : MonoBehaviour
         if (Input.GetMouseButton(0) && vecStart.magnitude != 0 && !isPhoneView)
         {
             wheelHold = true;
-            
+
             //calculate vector direction from the camera position to the mouse hold position
             Vector2 mousePos = Input.mousePosition;
-            Vector3 worldPosition = acamera.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, acamera.nearClipPlane));
+            Vector3 worldPosition =
+                acamera.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, acamera.nearClipPlane));
             Vector3 smjer = (worldPosition - cam.transform.position).normalized * 100;
-            
+
             //if this direction is passing throgh the wheel box collider, user is holding the wheel 
             if (Physics.Raycast(cam.transform.position, smjer, out RaycastHit hit1))
             {
@@ -110,16 +103,15 @@ public class CarController : MonoBehaviour
                     float angle = Vector3.Angle(vecStart, vec);
                     if (Mathf.Abs(realAngle) > maxAngle && Mathf.Abs(realAngle - cross) > Mathf.Abs(realAngle))
                     {
-
                     }
                     else
                     {
-
                         wheelTrans.RotateAround(wheelTrans.position, wheelTrans.up, angle * -cross);
                         vecStart = vec;
                         //turn Angle
 
                         realAngle += angle * -cross;
+                        OnAngleValueChanged.Invoke(Mathf.Abs(realAngle) / maxAngle);
 
                         Quaternion target = Quaternion.Euler(0, realAngle * turnScale, 0);
 
@@ -127,14 +119,11 @@ public class CarController : MonoBehaviour
                         trans.rotation = Quaternion.Slerp(trans.rotation, target, Time.deltaTime * smoothTurn);
                     }
                 }
-                
             }
             else
             {
                 wheelHold = false;
             }
-
-
         }
         else
         {
@@ -150,21 +139,18 @@ public class CarController : MonoBehaviour
             rb.angularVelocity = Vector3.zero;
             return;
         }
+
         //forward
         Vector3 vec = this.transform.forward.normalized * forceForward;
         Debug.Log(vec);
-        if (isOverBarrier && vec.x*side > 1)
+        if (isOverBarrier && vec.x * side > 1)
         {
-            rb.velocity = new Vector3(0,vec.y,vec.z);
+            rb.velocity = new Vector3(0, vec.y, vec.z);
         }
         else
         {
             rb.velocity = vec;
         }
-        
-
-
-
     }
 
     private IEnumerator BumpAnimation()
@@ -180,8 +166,10 @@ public class CarController : MonoBehaviour
             float angle = Mathf.Lerp(_minScale, _maxScale, _animateServo.Evaluate(t / _animationDuration));
             trans.rotation = Quaternion.Euler(0, angle * sign, 0);
         }
+
         trans.rotation = Quaternion.Euler(0, 0, 0);
     }
+
     public void switchView()
     {
         isPhoneView = !isPhoneView;
@@ -191,15 +179,14 @@ public class CarController : MonoBehaviour
     {
         if (Mathf.Abs(realAngle) > 5)
         {
-
             reverseRotateWheel();
-            
+
             realAngle += servoSpeed * -Mathf.Sign(realAngle);
+            OnAngleValueChanged.Invoke(Mathf.Abs(realAngle) / maxAngle);
 
             Quaternion target = Quaternion.Euler(0, realAngle * turnScale, 0);
 
             trans.rotation = Quaternion.Slerp(trans.rotation, target, Time.deltaTime * smoothTurn);
-
         }
         else if (Mathf.Abs(realAngle) != 0)
         {
@@ -207,7 +194,6 @@ public class CarController : MonoBehaviour
             realAngle = 0;
 
             StartCoroutine(BumpAnimation());
-
         }
     }
 
@@ -224,7 +210,8 @@ public class CarController : MonoBehaviour
         {
             side = -1;
             isOverBarrier = true;
-        }else if (other.CompareTag("WallRight"))
+        }
+        else if (other.CompareTag("WallRight"))
         {
             side = 1;
             isOverBarrier = true;
@@ -254,7 +241,7 @@ public class CarController : MonoBehaviour
             isOverBarrier = true;
         }
     }
-    
+
     public void OnGameFinished(bool dummyVar)
     {
         forceForward = 0;

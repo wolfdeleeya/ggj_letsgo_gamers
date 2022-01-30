@@ -10,6 +10,7 @@ public class CameraScript : MonoBehaviour
     [SerializeField]
     int phoneMask;
     [SerializeField] private GameObject _secondCameraGO;
+    [SerializeField] private RadioController _radio;
     Camera _cam;
     Transform _transform;
     public PostProcessVolume volume;
@@ -19,7 +20,7 @@ public class CameraScript : MonoBehaviour
     public UnityEvent onPhoneFocus;
     public UnityEvent onPhoneDefocus;
     bool PhoneActive;
-    // Start is called before the first frame update
+    
     void Start()
     {
        _cam = this.GetComponent<Camera>();
@@ -72,8 +73,8 @@ public class CameraScript : MonoBehaviour
 
                     }
                     PhoneActive = !PhoneActive;
-                }
-               
+                } else if(hit1.collider.gameObject.CompareTag("Radio"))
+                    _radio.SwitchChannel();
                
             }
            

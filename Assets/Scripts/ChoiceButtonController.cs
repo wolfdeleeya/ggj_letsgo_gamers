@@ -128,6 +128,7 @@ public class ChoiceButtonController : MonoBehaviour, IPointerEnterHandler, IPoin
     {
         if (_isShown)
         {
+            SFXManager.Instance.Play(SFXType.ButtonHover);
             if (_bumpCoroutine != null)
                 StopCoroutine(_bumpCoroutine);
             _bumpCoroutine = StartCoroutine(BumpUp());

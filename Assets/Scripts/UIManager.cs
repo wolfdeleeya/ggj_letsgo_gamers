@@ -88,6 +88,7 @@ public class UIManager : MonoBehaviour
 
     private IEnumerator GameOverCRT(bool isCrashed)
     {
+        _decolorizeEffect.enabled = true;
         _gameOverDescription.text = isCrashed ? _crashedString : _breakupString;
         float t = 0;
         while (t < _gameOverAnimationDuration)

@@ -75,6 +75,7 @@ public class ChoicesUIController : MonoBehaviour
 
     public void ChoicePicked()
     {
+        SFXManager.Instance.Play(SFXType.ButtonClick);
         HideChoices();
         _cachedMessage = null;
     }
