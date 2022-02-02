@@ -8,6 +8,7 @@ public class ChunkPool : MonoBehaviour
 {
     [SerializeField] private List<GameObject> _chunkPrefabs;
     [SerializeField] private int _numOfEachPrefab;
+    [SerializeField] private int _numOfChunksActive;
 
     private List<ChunkController> _spawnedChunks = new List<ChunkController>();
 
@@ -25,6 +26,10 @@ public class ChunkPool : MonoBehaviour
                 spawned.OnPlayerPassed.AddListener(ChunkExited);
             }
         }
+
+        PlaceChunk(Vector3.zero);
+        for (int i = 0; i < _numOfChunksActive - 1; ++i)
+            AddChunk();
     }
 
     private ChunkController GetRandomChunk()
@@ -60,5 +65,6 @@ public class ChunkPool : MonoBehaviour
         c.gameObject.SetActive(false);
         if (c == _lastChunk)
             _lastChunk = null;
+        AddChunk();
     }
 }

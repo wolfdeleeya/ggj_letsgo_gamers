@@ -21,7 +21,11 @@ public class SceneManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void ChangeScene(Scene s) => UnityEngine.SceneManagement.SceneManager.LoadScene((int) s);
+    public void ChangeScene(Scene s)
+    {
+        Time.timeScale = 1;
+        UnityEngine.SceneManagement.SceneManager.LoadScene((int) s);
+    } 
 
     public void Quit() => Application.Quit();
 }

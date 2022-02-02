@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13ccd840a5d6c25409f92ad47c00958e, type: 3}
+  m_Name: Message 6
+  m_EditorClassIdentifier: 
+  MessageText: Ok, but whyy?
+  TypingDuration: 2
+  Responses:
+  - ResponseText: He can't hold his liquer.
+    NextMessage: {fileID: 11400000, guid: b7dcc44c40b36dc4897f5bedce3f0637, type: 2}
+    AngerDelta: -10
+  - ResponseText: He is a manipulative prick.
+    NextMessage: {fileID: 11400000, guid: b7dcc44c40b36dc4897f5bedce3f0637, type: 2}
+    AngerDelta: -10
+  IsInstantGameOver: 0
+  IsInstantGameWon: 0

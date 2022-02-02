@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13ccd840a5d6c25409f92ad47c00958e, type: 3}
+  m_Name: Message 1
+  m_EditorClassIdentifier: 
+  MessageText: Oh I'm glad you asked me if I wanted anything.
+  TypingDuration: 3
+  Responses:
+  - ResponseText: Sorry I'm in a hurry.
+    NextMessage: {fileID: 11400000, guid: 0b69cd3e2bb98c04f8fe4c7b852f9628, type: 2}
+    AngerDelta: -5
+  - ResponseText: Well  I was about to until now.
+    NextMessage: {fileID: 11400000, guid: 9c083c01d0d9b904aba6adebba617205, type: 2}
+    AngerDelta: 10
+  - ResponseText: 'I forgot, you can tell me now. '
+    NextMessage: {fileID: 11400000, guid: 0b69cd3e2bb98c04f8fe4c7b852f9628, type: 2}
+    AngerDelta: 5
+  IsInstantGameOver: 0
+  IsInstantGameWon: 0

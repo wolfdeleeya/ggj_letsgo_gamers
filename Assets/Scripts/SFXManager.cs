@@ -11,7 +11,7 @@ public class DictionaryEntry
 }
 
 [Serializable]
-public enum SFXType {ButtonHover, ButtonClick, RadioClick}
+public enum SFXType {ButtonHover, ButtonClick, RadioClick, MessageNotification}
 
 public class SFXManager : MonoBehaviour
 {

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13ccd840a5d6c25409f92ad47c00958e, type: 3}
+  m_Name: Message 7
+  m_EditorClassIdentifier: 
+  MessageText: I would rip you a new a-hole right now if the developers had better
+    time managmet skills.LOVE YOU HON!
+  TypingDuration: 6
+  Responses: []
+  IsInstantGameOver: 0
+  IsInstantGameWon: 1

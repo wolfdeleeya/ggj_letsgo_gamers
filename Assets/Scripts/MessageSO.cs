@@ -8,7 +8,6 @@ public class MessageSO : ScriptableObject
     public string MessageText;
     public float TypingDuration;
     public List<Response> Responses;
-    [Range(0, 100)] public float AngerSpeedPerSecond;
     public bool IsInstantGameOver;
     public bool IsInstantGameWon;
 }

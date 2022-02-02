@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13ccd840a5d6c25409f92ad47c00958e, type: 3}
+  m_Name: Message 14
+  m_EditorClassIdentifier: 
+  MessageText: Great, I want some cookies. Have you thought about what happened yesterday?
+  TypingDuration: 5
+  Responses:
+  - ResponseText: Aren't you on a diet
+    NextMessage: {fileID: 11400000, guid: 1f69fbec124353d4a91afafcecc0160b, type: 2}
+    AngerDelta: 0
+  - ResponseText: Yes, I agree with you.
+    NextMessage: {fileID: 11400000, guid: ac8cff7735fb687408e1197c8858b580, type: 2}
+    AngerDelta: -5
+  - ResponseText: No
+    NextMessage: {fileID: 11400000, guid: 9db4715ecd8bb6b42886d6e4398c6435, type: 2}
+    AngerDelta: 0
+  - ResponseText: No, I didn't have the time
+    NextMessage: {fileID: 11400000, guid: 9db4715ecd8bb6b42886d6e4398c6435, type: 2}
+    AngerDelta: 5
+  IsInstantGameOver: 0
+  IsInstantGameWon: 0

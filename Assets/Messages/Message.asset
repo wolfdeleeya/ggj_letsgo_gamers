@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13ccd840a5d6c25409f92ad47c00958e, type: 3}
+  m_Name: Message
+  m_EditorClassIdentifier: 
+  MessageText: Hey baby, where you at?
+  TypingDuration: 3
+  Responses:
+  - ResponseText: I just went to the store
+    NextMessage: {fileID: 11400000, guid: 0032b6d635755934084bdd5bdbf9be8f, type: 2}
+    AngerDelta: 5
+  - ResponseText: Hey baby, I just went to the store. Do you need anything?
+    NextMessage: {fileID: 11400000, guid: d90a8a4e3e98b2b4b8c94af3a0809231, type: 2}
+    AngerDelta: -10
+  IsInstantGameOver: 0
+  IsInstantGameWon: 0

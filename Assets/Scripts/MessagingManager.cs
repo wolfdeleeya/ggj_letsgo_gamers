@@ -8,6 +8,7 @@ public class MessagingManager : MonoBehaviour
     public UnityEvent OnMessageSent;
     public UnityEventFloat OnGFAngerChanged;
     
+    [SerializeField] private float _angerPerSecond;
     [SerializeField] private MessageSO _beginningMessage;
     [SerializeField] private MessagingContainer _container;
 
@@ -41,6 +42,7 @@ public class MessagingManager : MonoBehaviour
         yield return new WaitForSeconds(message.TypingDuration);
         _currentMessage = message;
         _container.SpawnMessage(_currentMessage.MessageText, false);
+        SFXManager.Instance.Play(SFXType.MessageNotification);
         OnMessageReceived.Invoke(_currentMessage);
         if(_currentMessage.IsInstantGameOver)
             GameManager.Instance.GameOver(false);
@@ -60,6 +62,6 @@ public class MessagingManager : MonoBehaviour
     private void Update()
     {
         if (_currentMessage)
-            GFAnger += _currentMessage.AngerSpeedPerSecond * Time.deltaTime;
+            GFAnger += _angerPerSecond * Time.deltaTime;
     }
 }
